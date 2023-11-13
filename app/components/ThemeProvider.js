@@ -1,13 +1,22 @@
 'use client'
-import React from 'react';
+import React,{useState} from 'react';
 
-const ThemeContext = React.createContext()
-const ThemeProvider = (props) =>{
+const ThemeContext = React.createContext({
+    theme: true,
+    setTheme : ()=>{}
+})
+const ThemeProvider = ({children}) =>{
+    const [theme,setTheme] = useState(true);
 
+    function handleTheme(){
+        setTheme(!theme)
+    }
     return (
-        <React.Fragment>
-
-        </React.Fragment>
+        <ThemeContext.Provider value={{theme:theme, setTheme: handleTheme}}>
+            <React.Fragment>
+                {children}
+            </React.Fragment>
+        </ThemeContext.Provider>
     )
 }
 
